@@ -1,0 +1,40 @@
+# Foundry
+out/
+cache/
+broadcast/
+
+# Node (caso a gente adicione um frontend depois)
+node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Segredos: NUNCA versionar. O .env.example fica versionado como template.
+.env
+.env.local
+.env.*.local
+
+# Artefatos de deploy locais — addresses.json fica versionado por trilha, mas o
+# broadcast/ do forge não, porque cada deploy gera novos hashes.
+
+# Logs/telemetria dos workers
+logs/
+*.log
+
+# Fixtures geradas em runtime (mantemos só as canônicas em fixtures/)
+fixtures/_runtime/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# ferramentas locais de desenvolvimento
+.claude/

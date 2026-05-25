@@ -1,0 +1,45 @@
+[profile.default]
+# Apontamos para "contracts/" em vez de "src/" para refletir o monorepo das três trilhas.
+# Manter o Solidity todo em contracts/ separa visualmente o que é on-chain do que é
+# Python (agents/) e do que é deploy/script (deploy/, contracts/script/).
+src = "contracts"
+out = "out"
+libs = ["lib"]
+test = "contracts"
+script = "contracts/script"
+solc_version = "0.8.24"
+
+# Otimizações: o tamanho dos contratos importa em L2 — Base Sepolia herda o limite
+# EIP-170 do mainnet (24.576 bytes). 200 runs é o equilíbrio padrão entre custo de
+# deploy (menos runs = menor bytecode) e custo de execução repetida.
+optimizer = true
+optimizer_runs = 200
+
+# Remappings ajudam tanto o forge quanto o LSP a resolver os imports.
+remappings = [
+    "@openzeppelin/=lib/openzeppelin-contracts/",
+    "forge-std/=lib/forge-std/src/",
+]
+
+verbosity = 3
+fuzz = { runs = 256 }
+
+# Foundry bloqueia I/O de filesystem por padrão (segurança). O deploy script precisa
+# escrever deploy/addresses.json — autorizamos só essa pasta.
+fs_permissions = [{ access = "read-write", path = "./deploy" }]
+
+[rpc_endpoints]
+# URLs são lidas do .env — nunca hard-codar endpoint com API key versionado.
+base_sepolia = "${BASE_SEPOLIA_RPC_URL}"
+anvil = "http://127.0.0.1:8545"
+
+[etherscan]
+base_sepolia = { key = "${BASESCAN_API_KEY}", chain = 84532 }
+
+[fmt]
+line_length = 100
+tab_width = 4
+bracket_spacing = false
+int_types = "long"
+quote_style = "double"
+number_underscore = "thousands"

@@ -1,0 +1,28 @@
+# Stack Python dos workers/oráculos. Pinamos versões maiores para evitar
+# quebras de breaking change durante o hackathon, mas sem ser excessivamente
+# restritivo (deixamos o resolver pegar patches).
+
+# --- Web3 / chain ---
+web3>=7.0,<8.0           # cliente RPC, ABI encoding, contract bindings
+eth-account>=0.13,<0.14  # signing offline com chave privada
+eth-utils>=4.0,<6.0
+
+# --- E-mail / arquivos (LexProof) ---
+imap-tools>=1.6,<2.0     # IMAP4 com API agradável (versus imaplib cru)
+python-magic>=0.4.27,<1.0  # detecção de mimetype (fallback além da extensão)
+
+# --- Geo (TerraVerde) ---
+shapely>=2.0,<3.0        # geometria: testa interseção polígono fazenda vs alerta
+pyproj>=3.6,<4.0         # projeções/CRS quando o dataset não vier em WGS84
+
+# --- HTTP / utils ---
+requests>=2.32,<3.0
+httpx>=0.27,<0.29        # async opcional para batchs grandes de oráculo
+python-dotenv>=1.0,<2.0
+pydantic>=2.7,<3.0       # validação tipada dos payloads que vão para a chain
+typer[all]>=0.12,<1.0    # CLI bonita para os demo scripts
+rich>=13.7,<15.0         # logs ricos no terminal — substitui a UI no MVP
+
+# --- Testes ---
+pytest>=8.0,<9.0
+pytest-asyncio>=0.23,<1.0
